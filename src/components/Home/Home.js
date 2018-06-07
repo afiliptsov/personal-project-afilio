@@ -11,7 +11,12 @@ class Home extends Component {
     return (
       <div>
         {!this.props.isAuthed ? (
-          <p>Not Logged In</p>
+          <div>
+            <p>You are not logged in</p>
+            <a href={process.env.REACT_APP_LOGIN}>
+              <button>Login</button>
+            </a>
+          </div>
         ) : (
           <p>{JSON.stringify(this.props.user)}</p>
         )}
@@ -22,4 +27,7 @@ class Home extends Component {
 
 const mapStateToProps = ({ user }) => ({ ...user });
 
-export default connect(mapStateToProps, { getUser })(Home);
+export default connect(
+  mapStateToProps,
+  { getUser }
+)(Home);

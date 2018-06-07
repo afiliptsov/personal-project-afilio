@@ -9,7 +9,11 @@ const session = require("express-session");
 const passport = require("passport");
 
 const { getUser, strat, logout } = require(`${__dirname}/controllers/authCtrl`);
-const { getAllItems } = require(`${__dirname}/controllers/itemCtrl`);
+const {
+  getAllItems,
+  createItem
+} = require(`${__dirname}/controllers/itemCtrl`);
+const { addProfileInfo } = require(`${__dirname}/controllers/profileCtrl`);
 
 const port = process.env.port || 3001;
 
@@ -74,6 +78,10 @@ app.get("/api/me", getUser); //Method located at controllers/authCtrl
 app.get("/logout", logout);
 
 app.get("/api/item", getAllItems);
+
+app.put("/api/profile/:id", addProfileInfo);
+
+app.post("/api/additem", createItem);
 
 //Just a Testing endpoint
 // app.get("/api/test", (req, res, next) => {

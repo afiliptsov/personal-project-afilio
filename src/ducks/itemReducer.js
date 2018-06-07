@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const GET_ITEMS = "GET_ITEMS";
+const POST_ITEM = "POST_ITEM";
 
 export function getItems() {
   return {
@@ -9,6 +10,30 @@ export function getItems() {
   };
 }
 
+export function postItem(
+  user_id,
+  item_category,
+  item_title,
+  item_price,
+  item_description,
+  item_location,
+  item_zip,
+  item_picture
+) {
+  return {
+    type: POST_ITEM,
+    payload: axios.post("/api/additem", {
+      user_id,
+      item_category,
+      item_title,
+      item_price,
+      item_description,
+      item_location,
+      item_zip,
+      item_picture
+    })
+  };
+}
 const initialState = {
   items: [],
   isLoading: false
@@ -20,6 +45,11 @@ export default function itemReducer(state = initialState, action) {
       return { ...state, isLoading: true };
     case `${GET_ITEMS}_FULFILLED`:
       return { ...state, isLoading: false, items: action.payload.data };
+    case `${POST_ITEM}_PENDING`:
+      return { ...state, isLoading: true };
+    case `${POST_ITEM}_FULFILLED`:
+      return { ...state, isLoading: true };
+
     default:
       return state;
   }
