@@ -12,8 +12,9 @@ class CreateItem extends Component {
       price: 0,
       description: "",
       location: "",
-      zip: 0,
-      picture: ""
+      picture: "",
+      lat: 0,
+      lng: 0
     };
     this.createNewListing = this.createNewListing.bind(this);
     this.onChangeHandlerCategory = this.onChangeHandlerCategory.bind(this);
@@ -42,9 +43,14 @@ class CreateItem extends Component {
       location: e.target.value
     });
   }
-  onChangeHandlerZip(e) {
+  onChangeHandlerLat(e) {
     this.setState({
-      zip: e.target.value
+      lat: e.target.value
+    });
+  }
+  onChangeHandlerLng(e) {
+    this.setState({
+      lng: e.target.value
     });
   }
   onChangeHandlerPicture(e) {
@@ -61,8 +67,9 @@ class CreateItem extends Component {
       this.state.price,
       this.state.description,
       this.state.location,
-      this.state.zip,
-      this.state.picture
+      this.state.picture,
+      this.state.lat,
+      this.state.lng
     );
   }
 
@@ -88,13 +95,20 @@ class CreateItem extends Component {
         <input type="text" onChange={e => this.onChangeHandlerDescription(e)} />
         <p>location</p>
         <input type="text" onChange={e => this.onChangeHandlerLocation(e)} />
-        <p>zip</p>
-        <input type="text" onChange={e => this.onChangeHandlerZip(e)} />
         <p>picture</p>
         <input type="text" onChange={e => this.onChangeHandlerPicture(e)} />
         <p />
+
+        <p>Lat</p>
+        <input type="text" onChange={e => this.onChangeHandlerLat(e)} />
+
+        <p>Lng</p>
+        <input type="text" onChange={e => this.onChangeHandlerLng(e)} />
+        <p />
         <button onClick={this.createNewListing}>Submit</button>
         {console.log(this.props)}
+        {console.log("LAT", this.state.lat)}
+        {console.log("LNG", this.state.lng)}
       </div>
     );
   }

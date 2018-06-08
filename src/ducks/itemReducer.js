@@ -17,8 +17,9 @@ export function postItem(
   item_price,
   item_description,
   item_location,
-  item_zip,
-  item_picture
+  item_picture,
+  item_lat,
+  item_lng
 ) {
   return {
     type: POST_ITEM,
@@ -29,8 +30,9 @@ export function postItem(
       item_price,
       item_description,
       item_location,
-      item_zip,
-      item_picture
+      item_picture,
+      item_lat,
+      item_lng
     })
   };
 }

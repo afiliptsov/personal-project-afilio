@@ -19,8 +19,9 @@ const createItem = (req, res, next) => {
       req.body.item_price,
       req.body.item_description,
       req.body.item_location,
-      req.body.item_zip,
-      req.body.item_picture
+      req.body.item_picture,
+      req.body.item_lat,
+      req.body.item_lng
     ])
     .then(response => {
       res.status(200).json(response);
