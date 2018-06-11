@@ -29,19 +29,23 @@ class Item extends Component {
       ) {
         console.log("correct");
         return (
-          <div className="itemList" key={i}>
-            <h1>{items.item_category}</h1>
-            <h1>{items.item_title}</h1>
-            <h1>{items.item_price}</h1>
-          </div>
+          <Link to={"/item/" + items.id} key={items.id}>
+            <div className="itemList">
+              <h1>{items.item_category}</h1>
+              <h1>{items.item_title}</h1>
+              <h1>{items.item_price}</h1>
+            </div>
+          </Link>
         );
       } else if (this.state.category === "default") {
         return (
-          <div className="itemList" key={i}>
-            <h1>{items.item_category}</h1>
-            <h1>{items.item_title}</h1>
-            <h1>{items.item_price}</h1>
-          </div>
+          <Link to={"/item/" + items.id} key={items.id}>
+            <div className="itemList">
+              <h1>{items.item_category}</h1>
+              <h1>{items.item_title}</h1>
+              <h1>{items.item_price}</h1>
+            </div>
+          </Link>
         );
       }
     });

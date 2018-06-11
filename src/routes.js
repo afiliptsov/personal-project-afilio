@@ -6,6 +6,7 @@ import Login from "./components/Login/Login";
 import Item from "./components/Item/Item";
 import Profile from "./components/Profile/Profile";
 import CreateItem from "./components/Item/CreateItem";
+import ItemDescription from "./components/ItemDescription/ItemDescription";
 
 export default (
   <Switch>
@@ -14,6 +15,7 @@ export default (
     <Route exact path="/item" component={Item} />
     <Route exact path="/profile" component={Profile} />
     <Route exact path="/createItem" component={CreateItem} />
+    <Route exact path="/item/:id" component={ItemDescription} />
     <Route path="*" render={() => <div>404 Error</div>} />
   </Switch>
 );

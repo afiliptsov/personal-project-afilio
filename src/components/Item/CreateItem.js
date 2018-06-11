@@ -1,4 +1,10 @@
 import React, { Component } from "react";
+import PlacesAutocomplete from "react-places-autocomplete";
+import {
+  geocodeByAddress,
+  geocodeByPlaceId,
+  getLatLng
+} from "react-places-autocomplete";
 import { connect } from "react-redux";
 import { getItems, postItem } from "../../ducks/itemReducer";
 import { getUser } from "../../ducks/userReducer";
@@ -14,7 +20,8 @@ class CreateItem extends Component {
       location: "",
       picture: "",
       lat: 0,
-      lng: 0
+      lng: 0,
+      address: ""
     };
     this.createNewListing = this.createNewListing.bind(this);
     this.onChangeHandlerCategory = this.onChangeHandlerCategory.bind(this);
@@ -24,6 +31,14 @@ class CreateItem extends Component {
     this.props.getItems;
     this.props.getUser;
   }
+  handleChange = address => {
+    this.setState({ address });
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => this.setState({ lat: latLng.lat, lng: latLng.lng }))
+      .then(() => this.setState({ location: address }))
+      .catch(error => console.error("Error", error));
+  };
 
   onChangeHandlerCategory(category) {
     this.setState({ category: category });
@@ -41,16 +56,6 @@ class CreateItem extends Component {
   onChangeHandlerLocation(e) {
     this.setState({
       location: e.target.value
-    });
-  }
-  onChangeHandlerLat(e) {
-    this.setState({
-      lat: e.target.value
-    });
-  }
-  onChangeHandlerLng(e) {
-    this.setState({
-      lng: e.target.value
     });
   }
   onChangeHandlerPicture(e) {
@@ -74,9 +79,11 @@ class CreateItem extends Component {
   }
 
   render() {
+    // ADDING LATT LONG
+    console.log(this.state.address);
+
     return (
       <div>
-        {console.log(this.props.user.user.id)}
         <p>category</p>
         <button onClick={() => this.onChangeHandlerCategory("vehicles")}>
           Car
@@ -93,22 +100,49 @@ class CreateItem extends Component {
         <input type="text" onChange={e => this.onChangeHandlerPrice(e)} />
         <p>descr</p>
         <input type="text" onChange={e => this.onChangeHandlerDescription(e)} />
-        <p>location</p>
-        <input type="text" onChange={e => this.onChangeHandlerLocation(e)} />
         <p>picture</p>
         <input type="text" onChange={e => this.onChangeHandlerPicture(e)} />
         <p />
-
-        <p>Lat</p>
-        <input type="text" onChange={e => this.onChangeHandlerLat(e)} />
-
-        <p>Lng</p>
-        <input type="text" onChange={e => this.onChangeHandlerLng(e)} />
+        <p>location</p>
+        <PlacesAutocomplete
+          value={this.state.address}
+          onChange={this.handleChange}
+        >
+          {({ getInputProps, suggestions, getSuggestionItemProps }) => (
+            <div>
+              <input
+                {...getInputProps({
+                  placeholder: "Search Places ...",
+                  className: "location-search-input"
+                })}
+              />
+              <div className="autocomplete-dropdown-container">
+                {suggestions.map(suggestion => {
+                  const className = suggestion.active
+                    ? "suggestion-item--active"
+                    : "suggestion-item";
+                  // inline style for demonstration purpose
+                  const style = suggestion.active
+                    ? { backgroundColor: "#fafafa", cursor: "pointer" }
+                    : { backgroundColor: "#ffffff", cursor: "pointer" };
+                  return (
+                    <div
+                      {...getSuggestionItemProps(suggestion, {
+                        className,
+                        style
+                      })}
+                    >
+                      <span>{suggestion.description}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </PlacesAutocomplete>
         <p />
         <button onClick={this.createNewListing}>Submit</button>
         {console.log(this.props)}
-        {console.log("LAT", this.state.lat)}
-        {console.log("LNG", this.state.lng)}
       </div>
     );
   }

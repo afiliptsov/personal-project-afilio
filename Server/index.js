@@ -11,7 +11,8 @@ const passport = require("passport");
 const { getUser, strat, logout } = require(`${__dirname}/controllers/authCtrl`);
 const {
   getAllItems,
-  createItem
+  createItem,
+  getItem
 } = require(`${__dirname}/controllers/itemCtrl`);
 const { addProfileInfo } = require(`${__dirname}/controllers/profileCtrl`);
 
@@ -78,6 +79,8 @@ app.get("/api/me", getUser); //Method located at controllers/authCtrl
 app.get("/logout", logout);
 
 app.get("/api/item", getAllItems);
+
+app.get("/api/item/:id", getItem);
 
 app.put("/api/profile/:id", addProfileInfo);
 

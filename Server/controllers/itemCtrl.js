@@ -8,6 +8,16 @@ const getAllItems = (req, res) => {
     .catch(err => res.status(500).json(err));
 };
 
+const getItem = (req, res) => {
+  req.app
+    .get("db")
+    .getItem([req.params.id])
+    .then(response => {
+      res.status(200).json(response[0]);
+    })
+    .catch(err => console.log(err));
+};
+
 const createItem = (req, res, next) => {
   console.log(req.user);
   req.app
@@ -31,5 +41,6 @@ const createItem = (req, res, next) => {
 
 module.exports = {
   getAllItems,
-  createItem
+  createItem,
+  getItem
 };
