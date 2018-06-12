@@ -14,6 +14,7 @@ const {
   createItem,
   getItem
 } = require(`${__dirname}/controllers/itemCtrl`);
+const { addImage } = require(`${__dirname}/controllers/imageCtrl`);
 const { addProfileInfo } = require(`${__dirname}/controllers/profileCtrl`);
 
 const port = process.env.port || 3001;
@@ -85,6 +86,8 @@ app.get("/api/item/:id", getItem);
 app.put("/api/profile/:id", addProfileInfo);
 
 app.post("/api/additem", createItem);
+
+app.post("/api/addimage", addImage);
 
 //Just a Testing endpoint
 // app.get("/api/test", (req, res, next) => {

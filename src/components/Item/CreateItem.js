@@ -8,6 +8,8 @@ import {
 import { connect } from "react-redux";
 import { getItems, postItem } from "../../ducks/itemReducer";
 import { getUser } from "../../ducks/userReducer";
+import ImgUploader from "../ImageUploader/ImgUploader";
+import { Link } from "react-router-dom";
 
 class CreateItem extends Component {
   constructor(props) {
@@ -21,7 +23,8 @@ class CreateItem extends Component {
       picture: "",
       lat: 0,
       lng: 0,
-      address: ""
+      address: "",
+      response: 0
     };
     this.createNewListing = this.createNewListing.bind(this);
     this.onChangeHandlerCategory = this.onChangeHandlerCategory.bind(this);
@@ -65,17 +68,21 @@ class CreateItem extends Component {
   }
 
   createNewListing() {
-    this.props.postItem(
-      this.props.user.user.id,
-      this.state.category,
-      this.state.title,
-      this.state.price,
-      this.state.description,
-      this.state.location,
-      this.state.picture,
-      this.state.lat,
-      this.state.lng
-    );
+    this.props
+      .postItem(
+        this.props.user.user.id,
+        this.state.category,
+        this.state.title,
+        this.state.price,
+        this.state.description,
+        this.state.location,
+        this.state.picture,
+        this.state.lat,
+        this.state.lng
+      )
+      .then(response => {
+        this.setState({ response: response.value.data[0].id });
+      });
   }
 
   render() {
@@ -141,8 +148,18 @@ class CreateItem extends Component {
           )}
         </PlacesAutocomplete>
         <p />
-        <button onClick={this.createNewListing}>Submit</button>
+        <button onClick={this.createNewListing} className="submit-application">
+          Submit
+        </button>
+        <p />
+        <ImgUploader className="upload-image" postId={this.state.response} />
+
+        <Link to={"/item/" + this.state.response}>
+          <button className="post-button">Test</button>
+        </Link>
+
         {console.log(this.props)}
+        {console.log("RESPONSE AFTER POST", this.state.response)}
       </div>
     );
   }

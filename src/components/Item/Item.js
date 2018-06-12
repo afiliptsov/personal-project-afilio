@@ -8,13 +8,21 @@ class Item extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      category: "default"
+      category: "default",
+      search: ""
     };
     this.categoryToFilter = this.categoryToFilter.bind(this);
+    this.updateSearch = this.updateSearch.bind(this);
   }
 
   componentDidMount() {
     this.props.getItems();
+  }
+
+  updateSearch(e) {
+    this.setState({
+      search: e.target.value
+    });
   }
 
   categoryToFilter(categoryName) {
@@ -22,7 +30,7 @@ class Item extends Component {
   }
   render() {
     console.log(this.state.category);
-    let itemsArray = this.props.items.items.map((items, i) => {
+    let itemsArray = this.props.items.items.map((items, id) => {
       if (
         items.item_category === this.state.category &&
         this.state.category !== "default"
@@ -52,6 +60,11 @@ class Item extends Component {
 
     return (
       <div>
+        <input
+          type="text"
+          value={this.state.search}
+          onChange={this.updateSearch}
+        />
         <p>
           <button onClick={() => this.categoryToFilter("default")}>All</button>
           <button onClick={() => this.categoryToFilter("vehicles")}>
@@ -69,7 +82,7 @@ class Item extends Component {
           </Link>
         </p>
 
-        {itemsArray.length > 1 ? itemsArray : null}
+        {itemsArray.length >= 1 ? itemsArray : null}
       </div>
     );
   }
