@@ -17,7 +17,6 @@ export function postItem(
   item_price,
   item_description,
   item_location,
-  item_picture,
   item_lat,
   item_lng
 ) {
@@ -30,7 +29,6 @@ export function postItem(
       item_price,
       item_description,
       item_location,
-      item_picture,
       item_lat,
       item_lng
     })

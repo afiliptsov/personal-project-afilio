@@ -13,7 +13,8 @@ const getItem = (req, res) => {
     .get("db")
     .getItem([req.params.id])
     .then(response => {
-      res.status(200).json(response[0]);
+      console.log("Response From GETITEM", response);
+      res.status(200).json(response);
     })
     .catch(err => console.log(err));
 };
@@ -29,7 +30,6 @@ const createItem = (req, res, next) => {
       req.body.item_price,
       req.body.item_description,
       req.body.item_location,
-      req.body.item_picture,
       req.body.item_lat,
       req.body.item_lng
     ])
