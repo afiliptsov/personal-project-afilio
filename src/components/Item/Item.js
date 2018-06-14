@@ -17,6 +17,7 @@ class Item extends Component {
 
   componentDidMount() {
     this.props.getItems();
+    console.log(this.props.getItems());
   }
 
   updateSearch(e) {
@@ -42,6 +43,7 @@ class Item extends Component {
               <h1>{items.item_category}</h1>
               <h1>{items.item_title}</h1>
               <h1>{items.item_price}</h1>
+              <img className="item-home-image" src={items.image_url} alt="" />
             </div>
           </Link>
         );
@@ -52,6 +54,7 @@ class Item extends Component {
               <h1>{items.item_category}</h1>
               <h1>{items.item_title}</h1>
               <h1>{items.item_price}</h1>
+              <img className="item-home-image" src={items.image_url} alt="" />
             </div>
           </Link>
         );
