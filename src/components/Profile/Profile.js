@@ -85,7 +85,7 @@ class Profile extends Component {
       <div>
         <p>{this.props.user.user_name}</p>
         <p>{this.props.user.user_phone}</p>
-        <p>{this.props.user.user_avatar}</p>
+        <img src={this.props.user.user_avatar} alt="" />
         <p>{this.props.user.user_address}</p>
         <button onClick={this.enableEdit}>Edit</button>
       </div>

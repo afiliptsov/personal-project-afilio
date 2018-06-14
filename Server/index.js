@@ -54,7 +54,7 @@ passport.serializeUser((user, done) => {
   db.getUserByAuthid([user.id])
     .then(response => {
       if (!response[0]) {
-        db.addUserByAuthid([user.displayName, user.id])
+        db.addUserByAuthid([user.displayName, user.id, user.picture])
           .then(res => {
             // console.log(res);
             done(null, res[0]);
