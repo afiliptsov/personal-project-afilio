@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getUser } from "../../ducks/userReducer";
+import { getUser, postToken, reduceCredit } from "../../ducks/userReducer";
 import axios from "axios";
+import Payments from "../Stripe/Payments";
 
 class Profile extends Component {
   constructor(props) {
@@ -35,6 +36,11 @@ class Profile extends Component {
       profile_edit: !this.state.profile_edit
     });
   }
+
+  reduceCredit(id) {
+    this.props.reduceCredit(id);
+  }
+
   saveProfile(id) {
     let newProfile = {
       user_phone: this.state.user_phone,
@@ -88,6 +94,10 @@ class Profile extends Component {
         <img src={this.props.user.user_avatar} alt="" />
         <p>{this.props.user.user_address}</p>
         <button onClick={this.enableEdit}>Edit</button>
+        <Payments />
+        <button onClick={id => reduceCredit(this.props.user.id)}>
+          Reduce credit by 1
+        </button>
       </div>
     );
 
@@ -98,5 +108,5 @@ const mapStateToProps = ({ user }) => ({ ...user });
 
 export default connect(
   mapStateToProps,
-  { getUser }
+  { getUser, postToken, reduceCredit }
 )(Profile);

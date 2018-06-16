@@ -13,7 +13,6 @@ const getItem = (req, res) => {
     .get("db")
     .getItem([req.params.id])
     .then(response => {
-      console.log("Response From GETITEM", response);
       res.status(200).json(response);
     })
     .catch(err => console.log(err));
@@ -39,8 +38,20 @@ const createItem = (req, res, next) => {
     .catch(err => console.log(err));
 };
 
+const changeItemPriority = (req, res, next) => {
+  const id = [...req.body];
+  req.app
+    .get("db")
+    .changeItemPriority(id)
+    .then(response => {
+      res.status(200).json(response);
+    })
+    .catch(err => res.status(500).json(err));
+};
+
 module.exports = {
   getAllItems,
   createItem,
-  getItem
+  getItem,
+  changeItemPriority
 };

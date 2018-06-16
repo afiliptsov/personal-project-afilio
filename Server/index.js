@@ -8,16 +8,23 @@ const massive = require("massive");
 const session = require("express-session");
 const passport = require("passport");
 
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
 const { getUser, strat, logout } = require(`${__dirname}/controllers/authCtrl`);
 const {
   getAllItems,
   createItem,
-  getItem
+  getItem,
+  changeItemPriority
 } = require(`${__dirname}/controllers/itemCtrl`);
 const {
   addImage,
   getImageByPostId
 } = require(`${__dirname}/controllers/imageCtrl`);
+const {
+  addCredit,
+  reduceCredit
+} = require(`${__dirname}/controllers/billCtrl`);
 const { addProfileInfo } = require(`${__dirname}/controllers/profileCtrl`);
 
 const port = process.env.port || 3001;
@@ -93,6 +100,12 @@ app.post("/api/additem", createItem);
 app.post("/api/addimage", addImage);
 
 app.get("/api/getimage/:id", getImageByPostId);
+
+app.post("/api/stripe", addCredit);
+
+app.post("/api/usecredit", reduceCredit);
+
+app.post("/api/changepriority", changeItemPriority);
 
 //Just a Testing endpoint
 // app.get("/api/test", (req, res, next) => {

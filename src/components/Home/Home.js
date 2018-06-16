@@ -7,10 +7,12 @@ class Home extends Component {
   componentDidMount() {
     this.props.getUser();
   }
+
   render() {
+    console.log(this.props.user.user);
     return (
       <div>
-        {!this.props.isAuthed ? (
+        {!this.props.user.isAuthed ? (
           <div>
             <p>You are not logged in</p>
             <a href={process.env.REACT_APP_LOGIN}>
@@ -18,14 +20,16 @@ class Home extends Component {
             </a>
           </div>
         ) : (
-          <p>{JSON.stringify(this.props.user)}</p>
+          <p>{JSON.stringify(this.props.user.user)}</p>
         )}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ user }) => ({ ...user });
+const mapStateToProps = state => ({
+  user: state.user
+});
 
 export default connect(
   mapStateToProps,

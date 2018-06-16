@@ -30,7 +30,6 @@ class Item extends Component {
     this.setState({ category: categoryName });
   }
   render() {
-    console.log(this.state.category);
     let itemsArray = this.props.items.items.map((items, id) => {
       if (
         items.item_category === this.state.category &&

@@ -25,12 +25,7 @@ export class MapContainer extends Component {
         initialCenter={this.props.initialCenter}
         center={this.props.initialCenter}
       >
-        <Marker
-          onMouseover={this.onMouseoverMarker}
-          title={"The marker`s title will appear as a tooltip."}
-          name={"SOMA"}
-          position={this.props.initialCenter}
-        />
+        <Marker position={this.props.initialCenter} />
       </Map>
     );
   }
