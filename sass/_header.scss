@@ -1,0 +1,29 @@
+.header {
+  background-color: white;
+  height: 8vh;
+  width: 100vw;
+  display: flex;
+
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 2px solid red;
+  font-size: 1rem;
+  font-weight: 800;
+
+  .search {
+    margin-left: -8vw;
+    border-radius: 5px;
+    width: 30vw;
+    color: $color-background-header;
+    padding: 0.7rem 2rem;
+    background-color: $color-grey-light-2;
+  }
+
+  .logo {
+    width: 4rem;
+    height: auto;
+    margin-left: -2rem;
+    align-items: center;
+    margin-right: 3vw;
+  }
+}

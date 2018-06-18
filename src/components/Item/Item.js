@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getItems } from "../../ducks/itemReducer";
-import "./item.css";
+// import "./item.css";
 import { Link } from "react-router-dom";
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import { faCar, faTv, faBicycle } from "@fortawesome/fontawesome-free-solid";
 
 class Item extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      category: "default",
-      search: ""
+      category: "default"
     };
     this.categoryToFilter = this.categoryToFilter.bind(this);
-    this.updateSearch = this.updateSearch.bind(this);
   }
 
   componentDidMount() {
@@ -20,16 +20,11 @@ class Item extends Component {
     console.log(this.props.getItems());
   }
 
-  updateSearch(e) {
-    this.setState({
-      search: e.target.value
-    });
-  }
-
   categoryToFilter(categoryName) {
     this.setState({ category: categoryName });
   }
   render() {
+    console.log("Current item caregory", this.state.category);
     let itemsArray = this.props.items.items.map((items, id) => {
       if (
         items.item_category === this.state.category &&
@@ -38,22 +33,24 @@ class Item extends Component {
         console.log("correct");
         return (
           <Link to={"/item/" + items.id} key={items.id}>
-            <div className="itemList">
-              <h1>{items.item_category}</h1>
+            <div className="item">
+              <img className="item__img" src={items.image_url} alt="" />
+              <h1 className="item__price">{"$ " + items.item_price}</h1>
               <h1>{items.item_title}</h1>
-              <h1>{items.item_price}</h1>
-              <img className="item-home-image" src={items.image_url} alt="" />
+              <h1>{items.item_description}</h1>
+              <button className="btn__visible item__show">Show Listing</button>
             </div>
           </Link>
         );
       } else if (this.state.category === "default") {
         return (
           <Link to={"/item/" + items.id} key={items.id}>
-            <div className="itemList">
-              <h1>{items.item_category}</h1>
+            <div className="item">
+              <img className="item__img" src={items.image_url} alt="" />
+              <h1 className="item__price">{"$ " + items.item_price}</h1>
               <h1>{items.item_title}</h1>
-              <h1>{items.item_price}</h1>
-              <img className="item-home-image" src={items.image_url} alt="" />
+              <h1>{items.item_description}</h1>
+              <button className="btn__visible item__show">Show Listing</button>
             </div>
           </Link>
         );
@@ -61,30 +58,50 @@ class Item extends Component {
     });
 
     return (
-      <div>
-        <input
-          type="text"
-          value={this.state.search}
-          onChange={this.updateSearch}
-        />
-        <p>
-          <button onClick={() => this.categoryToFilter("default")}>All</button>
-          <button onClick={() => this.categoryToFilter("vehicles")}>
-            Cars
+      <div className="main-items">
+        <div class="main-categories">
+          <button
+            className="vehiclesButton"
+            onClick={() => this.categoryToFilter("vehicles")}
+          >
+            <FontAwesomeIcon className="mainSvg" icon={faCar} />
+            <span className="categoryNames">Vehicles</span>
           </button>
-          <button onClick={() => this.categoryToFilter("electronics")}>
-            Electronics
-          </button>
-          <button onClick={() => this.categoryToFilter("sports")}>Sport</button>
-        </p>
 
-        <p>
+          <button
+            className="electonicsHomeButton"
+            onClick={() => this.categoryToFilter("electronics")}
+          >
+            <FontAwesomeIcon className="mainSvg" icon={faTv} />
+            <span className="categoryNames">Electronics</span>
+          </button>
+
+          <button
+            className="sportsHomeButton"
+            onClick={() => this.categoryToFilter("sports")}
+          >
+            <FontAwesomeIcon className="mainSvg" icon={faBicycle} />
+            <span className="categoryNames">Sports</span>
+          </button>
+        </div>
+
+        <p className="fixed-createpost-button">
           <Link to="/createItem">
-            <button>Create post</button>
+            <p>
+              <svg
+                class="add-post-button"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z" />
+              </svg>
+            </p>
           </Link>
         </p>
 
-        {itemsArray.length >= 1 ? itemsArray : null}
+        <div className="items-grid">
+          {itemsArray.length >= 1 ? itemsArray : null}
+        </div>
       </div>
     );
   }

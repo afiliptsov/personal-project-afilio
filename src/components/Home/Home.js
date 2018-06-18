@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getUser } from "../../ducks/userReducer";
 
+import Item from "../Item/Item";
+
 class Home extends Component {
   componentDidMount() {
     this.props.getUser();
@@ -12,15 +14,10 @@ class Home extends Component {
     console.log(this.props.user.user);
     return (
       <div>
-        {!this.props.user.isAuthed ? (
-          <div>
-            <p>You are not logged in</p>
-            <a href={process.env.REACT_APP_LOGIN}>
-              <button>Login</button>
-            </a>
-          </div>
-        ) : (
+        <div>
           <p>{JSON.stringify(this.props.user.user)}</p>
+          <Item />
+        </div>
         )}
       </div>
     );

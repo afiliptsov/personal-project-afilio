@@ -1,0 +1,89 @@
+.fixed-createpost-button {
+  position: fixed;
+  bottom: 3%;
+  right: 2%;
+  border-color: #2c3133;
+  z-index: 10;
+}
+
+.add-post-button {
+  fill: #ff3366;
+  opacity: 0.8;
+  width: 13vw;
+  height: 13vh;
+}
+
+.main-categories {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  align-items: left;
+  flex-wrap: nowrap;
+  border-bottom: 2px solid red;
+  text-align: left;
+  background-color: white;
+
+  .mainSvg {
+    color: white;
+    text-shadow: 3px 6px #272634;
+    font-size: 4.5rem;
+    margin-right: 2vw;
+    text-align: left;
+    margin-left: 1vw;
+  }
+  .mainSvg:focus {
+    color: yellow;
+  }
+
+  .categoryNames {
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .vehiclesButton {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    background-color: #6666cc;
+    width: 20vw;
+    height: 10vh;
+    margin-right: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: inset 0px 0px 10px #373737;
+  }
+  .vehiclesButton:hover {
+    background-color: darken(#6666cc, 5%);
+    box-shadow: inset 0px 0px 10px #373737;
+  }
+  .electonicsHomeButton {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    background-color: #e5593a;
+    width: 20vw;
+    height: 10vh;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: inset 0px 0px 10px #373737;
+  }
+  .electonicsHomeButton:hover {
+    background-color: darken(#e5593a, 5%);
+    box-shadow: inset 0px 0px 10px #373737;
+  }
+
+  .sportsHomeButton {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    background-color: #009966;
+    width: 20vw;
+    height: 10vh;
+    margin-left: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: inset 0px 0px 10px #373737;
+  }
+  .sportsHomeButton:hover {
+    background-color: darken(#009966, 5%);
+    box-shadow: inset 0px 0px 10px #373737;
+  }
+}

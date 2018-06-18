@@ -4,6 +4,10 @@
   "private": true,
   "dependencies": {
     "@blueprintjs/core": "^2.3.1",
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-regular": "^5.0.13",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/react-fontawesome": "^0.0.20",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
@@ -12,10 +16,14 @@
     "express-session": "^1.15.6",
     "firebase": "^5.0.4",
     "google-maps-react": "^2.0.2",
+    "jquery": "^3.3.1",
     "massive": "^4.8.3",
+    "node-sass": "^4.9.0",
+    "nuka-carousel": "^4.2.1",
     "passport": "^0.4.0",
     "passport-auth0": "^0.6.1",
-    "react": "^16.4.0",
+    "react": "^16.4.1",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.4.0",
     "react-firebase-file-uploader": "^2.4.1",
     "react-places-autocomplete": "^7.1.2",
@@ -25,16 +33,21 @@
     "react-scripts": "1.1.4",
     "react-slick": "^0.23.1",
     "react-stripe-checkout": "^2.6.3",
+    "react-swipe": "^5.1.1",
+    "react-transition-group": "^2.3.1",
     "redux": "^4.0.0",
     "redux-promise-middleware": "^5.1.1",
     "slick-carousel": "^1.8.1",
-    "stripe": "^6.1.1"
+    "stripe": "^6.1.1",
+    "swipe-js-iso": "^2.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "watch:sass": "node-sass sass/main.scss src/style.comp.css -w",
+    "compile:sass": "node-sass sass/main.scss src/style.comp.css"
   },
   "proxy": "http://localhost:3001"
 }

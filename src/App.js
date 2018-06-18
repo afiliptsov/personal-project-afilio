@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 
 import Header from "./components/Header/Header";
 
-import "./App.css";
+// import "./App.css";
 
 import routes from "./routes";
 import store from "./store";
@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <HashRouter>
-          <div className="App">
+          <div className="container">
             <Header />
             {routes}
             <p className="App-intro" />

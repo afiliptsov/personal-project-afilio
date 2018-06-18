@@ -4,10 +4,11 @@ import { getItem } from "../../ducks/getItemReducer";
 import { changeItemPriority } from "../../ducks/itemReducer";
 import { getUser, reduceCredit } from "../../ducks/userReducer";
 import Map from "../GoogleMaps/MapContainer";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "./ItemDescription.css";
+// import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+// import Carousel from "nuka-carousel";
+// import "./ItemDescription.css";
 
 class ItemDescription extends Component {
   constructor(props) {
@@ -36,6 +37,11 @@ class ItemDescription extends Component {
     }
   }
   render() {
+    const style = {
+      width: "100vw",
+      height: "30vh"
+    };
+
     console.log(this.props);
     const { item } = this.props.item;
     const { user } = this.props.user;
@@ -69,24 +75,32 @@ class ItemDescription extends Component {
 
     let imageMap = item.map((curr, i) => {
       return (
-        <img
-          key={i}
-          className="image_description_slider"
-          src={curr.image_url}
-          alt=""
-        />
+        <div className="image_container">
+          <img
+            className="desc_image"
+            key={i}
+            width={900}
+            height={500}
+            src={curr.image_url}
+            alt=""
+          />
+        </div>
       );
     });
     let itemMap = item.map((curr, i) => {
       return (
-        <div>
+        <div className="item-creator-info">
+          <p className="desc__title">
+            <h1>{curr.item_title}</h1>
+          </p>
+          <p className="desc__price">{curr.item_price}</p>
           <p>{curr.user_name}</p>
-          <p>{curr.item_title}</p>
-          <p>{curr.item_price}</p>
           <p>{curr.item_category}</p>
           <p>{curr.item_description}</p>
           <p>{curr.item_location}</p>
           <Map
+            className="Map"
+            style={style}
             google={this.props.google}
             zoom={14}
             initialCenter={{ lat: curr.item_lat, lng: curr.item_lng }}
@@ -126,9 +140,11 @@ class ItemDescription extends Component {
               {console.log("NO CREDITS")}
             </div>
           ))}
-        {itemMap.values().next().value}
-        <div className="image_description-carousel">
-          <Slider {...settings}>{imageMap}</Slider>
+        <div className="main-description">
+          <div className="image_description-carousel">
+            <div className="desc_images_grid">{imageMap}</div>
+            {itemMap.values().next().value}
+          </div>
         </div>
       </div>
     );

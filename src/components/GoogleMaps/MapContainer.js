@@ -14,13 +14,13 @@ export class MapContainer extends Component {
   }
   render() {
     const style = {
-      width: "40%",
+      width: "100%",
       height: "40%"
     };
     return (
       <Map
         google={this.props.google}
-        style={style}
+        style={this.props.style}
         zoom={this.props.zoom}
         initialCenter={this.props.initialCenter}
         center={this.props.initialCenter}
