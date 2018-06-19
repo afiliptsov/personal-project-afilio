@@ -26,11 +26,16 @@ class ImgUploader extends Component {
     this.setState({ item: filename, progress: 100, isUploading: false });
     firebase
       .storage()
-      .ref("images")
+      .ref()
       .child(filename)
       .getDownloadURL()
       .then(url => this.setState({ itemURL: url }))
-      .then(() => this.props.postImage(this.props.postId, this.state.itemURL));
+      .then(() =>
+        this.props.postImage(
+          this.props.postId,
+          this.state.itemURL.replace("/o/", "/o/resized-")
+        )
+      );
   };
 
   //   uploadUrlToDatabase() {
@@ -51,7 +56,7 @@ class ImgUploader extends Component {
             accept="image/*"
             name="item"
             randomizeFilename
-            storageRef={firebase.storage().ref("images")}
+            storageRef={firebase.storage().ref()}
             onUploadStart={this.handleUploadStart}
             onUploadError={this.handleUploadError}
             onUploadSuccess={this.handleUploadSuccess}

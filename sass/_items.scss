@@ -1,5 +1,5 @@
 .main-items {
-  height: 98vh;
+  height: auto;
 }
 .itemList {
   border-style: solid;
@@ -54,7 +54,23 @@
   &__name {
   }
 
-  &__locaton {
+  &__location {
+    grid-column: 1/-1;
+    text-align: center;
+    background-color: white;
+    width: 80%;
+    margin-left: 10%;
+    border-radius: 0px 0px 10px 10px;
+    margin-bottom: 3%;
+  }
+
+  &__title {
+    text-align: center;
+    grid-column: 1/-1;
+    background-color: white;
+    padding: 1rem;
+    width: 80%;
+    margin-left: 10%;
   }
 
   &__price {
@@ -65,15 +81,22 @@
     background-color: #0f0f67;
     color: white;
     font-weight: 400;
-    border-radius: 0px 0px 10px 10px;
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.9);
     width: 80%;
     margin-left: 10%;
   }
+  &__description {
+    background-color: white;
+    text-align: center;
+    width: 80%;
+    margin-left: 20%;
+  }
   &__condition {
+    background-color: white;
+    text-align: left;
+    width: 80%;
   }
-  &__name {
-  }
+
   &__show {
     grid-column: 1/-1;
     text-align: center;
@@ -82,12 +105,27 @@
     background-color: #009966;
     color: white;
     font-weight: 400;
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
     box-shadow: inset 0px 0px 10px rgba(37, 112, 4, 0.798);
   }
   &__show:hover {
     background-color: darken(#009966, 5%);
   }
+}
+.item.details {
+  margin-top: 1vh;
+  margin-left: 20%;
+  margin-right: 20%;
+  border-radius: 10px;
+  border: 0.1% solid $color-primary;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 1%;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.item.details:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 .item:hover {
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);

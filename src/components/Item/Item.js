@@ -4,7 +4,12 @@ import { getItems } from "../../ducks/itemReducer";
 // import "./item.css";
 import { Link } from "react-router-dom";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
-import { faCar, faTv, faBicycle } from "@fortawesome/fontawesome-free-solid";
+import {
+  faCar,
+  faTv,
+  faBicycle,
+  faReplyAll
+} from "@fortawesome/fontawesome-free-solid";
 
 class Item extends Component {
   constructor(props) {
@@ -36,8 +41,10 @@ class Item extends Component {
             <div className="item">
               <img className="item__img" src={items.image_url} alt="" />
               <h1 className="item__price">{"$ " + items.item_price}</h1>
-              <h1>{items.item_title}</h1>
-              <h1>{items.item_description}</h1>
+              <h1 className="item__title">{items.item_title}</h1>
+              <h2 className="item__description">Description:</h2>
+              <h2 className="item__condition">{items.item_description}</h2>
+              <h3 className="item__location">{items.item_location}</h3>
               <button className="btn__visible item__show">Show Listing</button>
             </div>
           </Link>
@@ -48,8 +55,10 @@ class Item extends Component {
             <div className="item">
               <img className="item__img" src={items.image_url} alt="" />
               <h1 className="item__price">{"$ " + items.item_price}</h1>
-              <h1>{items.item_title}</h1>
-              <h1>{items.item_description}</h1>
+              <h1 className="item__title">{items.item_title}</h1>
+              <h2 className="item__description">Description:</h2>
+              <h2 className="item__condition">{items.item_description}</h2>
+              <h3 className="item__location">{items.item_location}</h3>
               <button className="btn__visible item__show">Show Listing</button>
             </div>
           </Link>
@@ -60,6 +69,13 @@ class Item extends Component {
     return (
       <div className="main-items">
         <div class="main-categories">
+          <button
+            className="vehiclesButton"
+            onClick={() => this.categoryToFilter("default")}
+          >
+            <FontAwesomeIcon className="mainSvg" icon={faReplyAll} />
+            <span className="categoryNames">All</span>
+          </button>
           <button
             className="vehiclesButton"
             onClick={() => this.categoryToFilter("vehicles")}

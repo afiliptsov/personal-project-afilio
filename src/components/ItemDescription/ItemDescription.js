@@ -4,6 +4,10 @@ import { getItem } from "../../ducks/getItemReducer";
 import { changeItemPriority } from "../../ducks/itemReducer";
 import { getUser, reduceCredit } from "../../ducks/userReducer";
 import Map from "../GoogleMaps/MapContainer";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import { faEnvelope, faPhone } from "@fortawesome/fontawesome-free-solid";
 // import Slider from "react-slick";
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
@@ -21,7 +25,9 @@ class ItemDescription extends Component {
     this.moveItemToPriorityList = this.moveItemToPriorityList.bind(this);
   }
   componentDidMount() {
+    window.scrollTo(0, 0);
     //Need to check how to pass params of request into getItem
+
     this.props
       .getItem(this.props.match.params.id)
       .then(res => console.log(res));
@@ -38,7 +44,13 @@ class ItemDescription extends Component {
   }
   render() {
     const style = {
-      width: "100vw",
+      width: "100%",
+      height: "100%"
+    };
+    const containerStyle = {
+      margin: "auto",
+      position: "relative",
+      width: "80%",
       height: "30vh"
     };
 
@@ -75,36 +87,44 @@ class ItemDescription extends Component {
 
     let imageMap = item.map((curr, i) => {
       return (
-        <div className="image_container">
-          <img
-            className="desc_image"
-            key={i}
-            width={900}
-            height={500}
-            src={curr.image_url}
-            alt=""
-          />
+        <div key={i}>
+          <img className="desc_image" src={curr.image_url} alt="" />
         </div>
       );
     });
     let itemMap = item.map((curr, i) => {
       return (
-        <div className="item-creator-info">
-          <p className="desc__title">
-            <h1>{curr.item_title}</h1>
-          </p>
-          <p className="desc__price">{curr.item_price}</p>
-          <p>{curr.user_name}</p>
-          <p>{curr.item_category}</p>
-          <p>{curr.item_description}</p>
-          <p>{curr.item_location}</p>
-          <Map
-            className="Map"
-            style={style}
-            google={this.props.google}
-            zoom={14}
-            initialCenter={{ lat: curr.item_lat, lng: curr.item_lng }}
-          />
+        <div className="item details">
+          <div className="item__title">
+            <Carousel
+              showArrows={true}
+              showStatus={true}
+              showThumbs={false}
+              width={250}
+            >
+              {imageMap}
+            </Carousel>
+          </div>
+          <h1 className="item__title">{curr.item_title}</h1>
+          <p className="item__price">{"$ " + curr.item_price}</p>
+          <h2 className="item__description">Seler</h2>
+          <h2 className="item__condition">{curr.user_name}</h2>
+          <h2 className="item__description">Description:</h2>
+          <h2 className="item__condition">{curr.item_description}</h2>
+          <h2 className="item__location">{curr.item_location}</h2>
+          <h2>
+            <FontAwesomeIcon className="mainSvg" icon={faEnvelope} />
+          </h2>
+          <div className="desc__test-map">
+            <Map
+              className="Map"
+              style={style}
+              containerStyle={containerStyle}
+              google={this.props.google}
+              zoom={11}
+              initialCenter={{ lat: curr.item_lat, lng: curr.item_lng }}
+            />
+          </div>
         </div>
       );
     });
@@ -140,12 +160,7 @@ class ItemDescription extends Component {
               {console.log("NO CREDITS")}
             </div>
           ))}
-        <div className="main-description">
-          <div className="image_description-carousel">
-            <div className="desc_images_grid">{imageMap}</div>
-            {itemMap.values().next().value}
-          </div>
-        </div>
+        <div className="main-description">{itemMap.values().next().value}</div>
       </div>
     );
   }

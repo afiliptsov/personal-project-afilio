@@ -14,11 +14,12 @@ export class MapContainer extends Component {
   }
   render() {
     const style = {
-      width: "100%",
-      height: "40%"
+      width: "400px",
+      height: "400px"
     };
     return (
       <Map
+      containerStyle={this.props.containerStyle}
         google={this.props.google}
         style={this.props.style}
         zoom={this.props.zoom}
