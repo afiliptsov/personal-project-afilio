@@ -106,15 +106,28 @@ class ItemDescription extends Component {
             </Carousel>
           </div>
           <h1 className="item__title">{curr.item_title}</h1>
-          <p className="item__price">{"$ " + curr.item_price}</p>
-          <h2 className="item__description">Seler</h2>
+          <h2 className="item__price">{"$ " + curr.item_price}</h2>
+          <h2 className="item__description">Seller:</h2>
           <h2 className="item__condition">{curr.user_name}</h2>
           <h2 className="item__description">Description:</h2>
           <h2 className="item__condition">{curr.item_description}</h2>
           <h2 className="item__location">{curr.item_location}</h2>
-          <h2>
-            <FontAwesomeIcon className="mainSvg" icon={faEnvelope} />
-          </h2>
+
+          <a href={`mailto:${curr.user_email}`}>
+            <h2 className="item__email">
+              Email
+              <FontAwesomeIcon className="descSvg" icon={faEnvelope} />
+            </h2>
+          </a>
+
+          <a href={`tel:${curr.user_phone}`}>
+            <h2 className="item__call ">
+              Call
+              <FontAwesomeIcon className="descSvg" icon={faPhone} />
+            </h2>
+          </a>
+
+          <h2 />
           <div className="desc__test-map">
             <Map
               className="Map"

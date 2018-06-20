@@ -15,7 +15,6 @@ class Home extends Component {
     return (
       <div>
         <div>
-          <p>{JSON.stringify(this.props.user.user)}</p>
           <Item />
         </div>
         )}

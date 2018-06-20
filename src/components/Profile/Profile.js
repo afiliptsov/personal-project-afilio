@@ -93,6 +93,7 @@ class Profile extends Component {
         <p>{this.props.user.user_phone}</p>
         <img src={this.props.user.user_avatar} alt="" />
         <p>{this.props.user.user_address}</p>
+        <p>{this.props.user.credits}</p>
         <button onClick={this.enableEdit}>Edit</button>
         <Payments />
         <button onClick={id => reduceCredit(this.props.user.id)}>

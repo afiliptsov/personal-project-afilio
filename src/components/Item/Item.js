@@ -39,6 +39,9 @@ class Item extends Component {
         return (
           <Link to={"/item/" + items.id} key={items.id}>
             <div className="item">
+              {items.priority === 1 ? (
+                <div class="priority-tag">HOT</div>
+              ) : null}
               <img className="item__img" src={items.image_url} alt="" />
               <h1 className="item__price">{"$ " + items.item_price}</h1>
               <h1 className="item__title">{items.item_title}</h1>
@@ -53,6 +56,9 @@ class Item extends Component {
         return (
           <Link to={"/item/" + items.id} key={items.id}>
             <div className="item">
+              {items.priority === 1 ? (
+                <div class="priority-tag">HOT</div>
+              ) : null}
               <img className="item__img" src={items.image_url} alt="" />
               <h1 className="item__price">{"$ " + items.item_price}</h1>
               <h1 className="item__title">{items.item_title}</h1>
