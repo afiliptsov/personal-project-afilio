@@ -20,7 +20,7 @@
 
 .items-grid {
   grid-column: center-start / center-end;
-  margin: 7rem 0;
+  margin: 8.5rem 0;
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
@@ -254,7 +254,7 @@
   display: none;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 440px) {
   .item.details {
     margin-left: 0%;
     margin-right: 0%;

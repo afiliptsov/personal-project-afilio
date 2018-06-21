@@ -33,6 +33,7 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
     "react-slick": "^0.23.1",
+    "react-sticky": "^6.0.2",
     "react-stripe-checkout": "^2.6.3",
     "react-swipe": "^5.1.1",
     "react-toastify": "^4.1.0",

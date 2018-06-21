@@ -8,7 +8,8 @@ import {
   faCar,
   faTv,
   faBicycle,
-  faReplyAll
+  faReplyAll,
+  faFire
 } from "@fortawesome/fontawesome-free-solid";
 
 class Item extends Component {
@@ -28,8 +29,9 @@ class Item extends Component {
   categoryToFilter(categoryName) {
     this.setState({ category: categoryName });
   }
+
   render() {
-    console.log("Current item caregory", this.state.category);
+    console.log("Current item category", this.state.category);
     let itemsArray = this.props.items.items.map((items, id) => {
       if (
         items.item_category === this.state.category &&
@@ -45,8 +47,6 @@ class Item extends Component {
               <img className="item__img" src={items.image_url} alt="" />
               <h1 className="item__price">{"$ " + items.item_price}</h1>
               <h1 className="item__title">{items.item_title}</h1>
-              <h2 className="item__description">Description:</h2>
-              <h2 className="item__condition">{items.item_description}</h2>
               <h3 className="item__location">{items.item_location}</h3>
               <button className="btn__visible item__show">Show Listing</button>
             </div>
@@ -62,8 +62,6 @@ class Item extends Component {
               <img className="item__img" src={items.image_url} alt="" />
               <h1 className="item__price">{"$ " + items.item_price}</h1>
               <h1 className="item__title">{items.item_title}</h1>
-              <h2 className="item__description">Description:</h2>
-              <h2 className="item__condition">{items.item_description}</h2>
               <h3 className="item__location">{items.item_location}</h3>
               <button className="btn__visible item__show">Show Listing</button>
             </div>
@@ -76,34 +74,36 @@ class Item extends Component {
       <div className="main-items">
         <div class="main-categories">
           <button
-            className="vehiclesButton"
+            className="headerButtons"
             onClick={() => this.categoryToFilter("default")}
           >
-            <FontAwesomeIcon className="mainSvg" icon={faReplyAll} />
-            <span className="categoryNames">All</span>
+            <FontAwesomeIcon className="headerSvg" icon={faReplyAll} />
           </button>
           <button
-            className="vehiclesButton"
+            className="headerButtons"
             onClick={() => this.categoryToFilter("vehicles")}
           >
-            <FontAwesomeIcon className="mainSvg" icon={faCar} />
-            <span className="categoryNames">Vehicles</span>
+            <FontAwesomeIcon className="headerSvg" icon={faCar} />
+          </button>
+
+          <button className="fireButton">
+            <div>
+              <FontAwesomeIcon className="fireSvg" icon={faFire} />
+            </div>
           </button>
 
           <button
-            className="electonicsHomeButton"
+            className="headerButtons"
             onClick={() => this.categoryToFilter("electronics")}
           >
-            <FontAwesomeIcon className="mainSvg" icon={faTv} />
-            <span className="categoryNames">Electronics</span>
+            <FontAwesomeIcon className="headerSvg" icon={faTv} />
           </button>
 
           <button
-            className="sportsHomeButton"
+            className="headerButtons"
             onClick={() => this.categoryToFilter("sports")}
           >
-            <FontAwesomeIcon className="mainSvg" icon={faBicycle} />
-            <span className="categoryNames">Sports</span>
+            <FontAwesomeIcon className="headerSvg" icon={faBicycle} />
           </button>
         </div>
 
