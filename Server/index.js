@@ -8,6 +8,8 @@ const massive = require("massive");
 const session = require("express-session");
 const passport = require("passport");
 
+app.use(express.static(`${__dirname}/../build`));
+
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const { getUser, strat, logout } = require(`${__dirname}/controllers/authCtrl`);
@@ -86,8 +88,11 @@ passport.deserializeUser((user, done) => done(null, user));
 app.get(
   "/login",
   passport.authenticate("auth0", {
-    successRedirect: "http://localhost:3000/#/",
-    failureRedirect: "/login"
+    // successRedirect: "http://localhost:3000/#/",
+    // failureRedirect: "/login"
+
+    successRedirect: "/",
+    failureRedirect: "/"
   })
 );
 
@@ -119,6 +124,10 @@ app.post("/api/changepriority", changeItemPriority);
 // app.get("/api/test", (req, res, next) => {
 //   res.status(200).json("Success");
 // });
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build/index.html"));
+});
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
