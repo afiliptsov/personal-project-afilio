@@ -15,7 +15,8 @@ const {
   getAllItems,
   createItem,
   getItem,
-  changeItemPriority
+  changeItemPriority,
+  deleteItem
 } = require(`${__dirname}/controllers/itemCtrl`);
 const {
   addImage,
@@ -61,7 +62,12 @@ passport.serializeUser((user, done) => {
   db.getUserByAuthid([user.id])
     .then(response => {
       if (!response[0]) {
-        db.addUserByAuthid([user.displayName, user.id, user.picture,user.nickname+"@gmail.com"])
+        db.addUserByAuthid([
+          user.displayName,
+          user.id,
+          user.picture,
+          user.nickname + "@gmail.com"
+        ])
           .then(res => {
             // console.log(res);
             done(null, res[0]);
@@ -90,6 +96,8 @@ app.get("/api/me", getUser); //Method located at controllers/authCtrl
 app.get("/logout", logout);
 
 app.get("/api/item", getAllItems);
+
+app.delete("/api/deleteItem/:id", deleteItem);
 
 app.get("/api/item/:id", getItem);
 

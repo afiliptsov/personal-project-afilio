@@ -6,13 +6,15 @@ import itemReducer from "./ducks/itemReducer";
 import getItemReducer from "./ducks/getItemReducer";
 import imageReducer from "./ducks/imageReducer";
 import getImageByPostIdReducer from "./ducks/getImageByPostIdReducer";
+import deleteItemReducer from "./ducks/deleteItemReducer";
 
 const combinedReducers = combineReducers({
   user: userReducer,
   items: itemReducer,
   item: getItemReducer,
   images: imageReducer,
-  storedImage: getImageByPostIdReducer
+  storedImage: getImageByPostIdReducer,
+  deleteItem: deleteItemReducer
 });
 
 const store = createStore(

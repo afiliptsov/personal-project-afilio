@@ -3,33 +3,35 @@ import { connect } from "react-redux";
 import { getUser, postToken, reduceCredit } from "../../ducks/userReducer";
 import axios from "axios";
 import Payments from "../Stripe/Payments";
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import { faFire } from "@fortawesome/fontawesome-free-solid";
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user_name: this.props.user.user_name,
       user_phone: this.props.user.user_phone,
-      user_avatar: this.props.user.user_avatar,
-      user_address: this.props.user.user_address,
+      user_email: this.props.user.user_email,
       profile_edit: false
     };
-    this.onChangeHandlerAvatar = this.onChangeHandlerAvatar.bind(this);
+    this.onChangeHandlerEmail = this.onChangeHandlerEmail.bind(this);
     this.onChangeHandlerPhone = this.onChangeHandlerPhone.bind(this);
-    this.onChangeHandlerAddress = this.onChangeHandlerAddress.bind(this);
+    this.onChangeHandlerName = this.onChangeHandlerName.bind(this);
     this.enableEdit = this.enableEdit.bind(this);
     this.saveProfile = this.saveProfile.bind(this);
   }
   componentDidMount() {
     this.props.getUser();
   }
-  onChangeHandlerAvatar(e) {
-    this.setState({ user_avatar: e.target.value });
-  }
   onChangeHandlerPhone(e) {
     this.setState({ user_phone: e.target.value });
   }
-  onChangeHandlerAddress(e) {
-    this.setState({ user_address: e.target.value });
+  onChangeHandlerName(e) {
+    this.setState({ user_name: e.target.value });
+  }
+  onChangeHandlerEmail(e) {
+    this.setState({ user_email: e.target.value });
   }
   enableEdit() {
     return this.setState({
@@ -43,9 +45,18 @@ class Profile extends Component {
 
   saveProfile(id) {
     let newProfile = {
-      user_phone: this.state.user_phone,
-      user_avatar: this.state.user_avatar,
-      user_address: this.state.user_address
+      user_phone:
+        this.state.user_phone.length > 0 && this.state.user_phone !== " "
+          ? this.state.user_phone
+          : this.props.user.user_phone,
+      user_name:
+        this.state.user_name.length > 0 && this.state.user_name !== " "
+          ? this.state.user_name
+          : this.props.user.user_name,
+      user_email:
+        this.state.user_email.length > 0 && this.state.user_email !== " "
+          ? this.state.user_email
+          : this.props.user.user_email
     };
     axios.put(`/api/profile/${id}`, newProfile);
     return this.setState({
@@ -54,55 +65,47 @@ class Profile extends Component {
   }
 
   render() {
-    console.log(this.props.getUser);
-    console.log();
-    let editEnabled = (
-      <div>
-        <p>{this.props.user.user_name}</p>
-        <p>
-          <input
-            type="text"
-            placeholder="Phone"
-            onChange={e => this.onChangeHandlerPhone(e)}
-          />
-        </p>
-        <p>
-          <input
-            type="text"
-            placeholder="Avatar"
-            onChange={e => this.onChangeHandlerAvatar(e)}
-          />
-        </p>
-        <p>
-          <input
-            type="text"
-            placeholder="Address"
-            onChange={e => this.onChangeHandlerAddress(e)}
-          />
-        </p>
-        <p>
-          <button onClick={id => this.saveProfile(this.props.user.id)}>
-            Save
-          </button>
-        </p>
-      </div>
-    );
-    let editDisabled = (
-      <div>
-        <p>{this.props.user.user_name}</p>
-        <p>{this.props.user.user_phone}</p>
-        <img src={this.props.user.user_avatar} alt="" />
-        <p>{this.props.user.user_address}</p>
-        <p>{this.props.user.credits}</p>
-        <button onClick={this.enableEdit}>Edit</button>
-        <Payments />
-        <button onClick={id => reduceCredit(this.props.user.id)}>
-          Reduce credit by 1
-        </button>
-      </div>
-    );
+    return (
+      <div className="profile-grid">
+        <img
+          className="circle-profile"
+          src={this.props.user.user_avatar}
+          alt="avatar"
+        />
+        <input
+          className="profile-item"
+          type="text"
+          value={this.state.user_name}
+          onChange={e => this.onChangeHandlerName(e)}
+          onBlur={() => this.saveProfile(this.props.user.id)}
+        />
+        <input
+          className="profile-item"
+          type="text"
+          value={this.state.user_email}
+          onChange={e => this.onChangeHandlerEmail(e)}
+          onBlur={() => this.saveProfile(this.props.user.id)}
+        />
+        <input
+          className="profile-item"
+          type="text"
+          value={this.state.user_phone}
+          onChange={e => this.onChangeHandlerPhone(e)}
+          onBlur={() => this.saveProfile(this.props.user.id)}
+        />
 
-    return <div>{!this.state.profile_edit ? editDisabled : editEnabled}</div>;
+        <h3 className="profile-item">
+          <div className="credits">
+            <h3>Credits:</h3>
+            <div className="fire">
+              {this.props.user.credits}
+              <FontAwesomeIcon className="descSvg" icon={faFire} />
+            </div>
+          </div>
+        </h3>
+        <Payments />
+      </div>
+    );
   }
 }
 const mapStateToProps = ({ user }) => ({ ...user });

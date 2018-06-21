@@ -45,11 +45,8 @@ class ImgUploader extends Component {
   render() {
     console.log(this.props);
     return (
-      <div>
+      <div className="upload-image">
         <form>
-          <label>Item:</label>
-          {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
-          {this.state.itemURL && <img src={this.state.itemURL} />}
           {console.log(this.state.itemURL)}
           {console.log("Final state is", this.state.avatarURL)}
           <CustomUploadButton
@@ -63,14 +60,21 @@ class ImgUploader extends Component {
             onProgress={this.handleProgress}
             multiple
             style={{
+              display: "flex",
+              justifyCcontent: "center",
               backgroundColor: "steelblue",
+              margin: "20vh 25vw 0vh 25vw",
               color: "white",
-              padding: 5,
+              padding: 40,
               borderRadius: 4
             }}
           >
-            Select your awesome item
+            Upload images
           </CustomUploadButton>
+          {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
+          {this.state.isUploading === false && this.state.progress === 100 ? (
+            <h1>UPLOADED</h1>
+          ) : null}
         </form>
       </div>
     );

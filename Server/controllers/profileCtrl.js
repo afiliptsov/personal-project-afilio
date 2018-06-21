@@ -15,11 +15,12 @@ const addProfileInfo = (req, res) => {
     .get("db")
     .addProfileInfo([
       req.body.user_phone,
-      req.body.user_avatar,
-      req.body.user_address,
+      req.body.user_name,
+      req.body.user_email,
       req.params.id
     ])
     .then(response => {
+      req.session.passport.user = response[0];
       res.status(200).json(response);
     })
     .catch(err => console.log(err));

@@ -13,6 +13,7 @@
   margin-left: 10%;
   border-radius: 10px 10px 0px 0px;
   padding: 1.25rem;
+  position: relative;
 }
 .desc__price {
   grid-column: 1/-1;
@@ -60,6 +61,12 @@
 //   margin-right: 20vw;
 //   border-radius: 10px 10px 10px 0px;
 // }
+.main-description {
+  position: relative;
+}
+.delete-button {
+  position: absolute;
+}
 
 .image_description {
   margin: 0 auto;

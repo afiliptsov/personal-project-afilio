@@ -49,9 +49,20 @@ const changeItemPriority = (req, res, next) => {
     .catch(err => res.status(500).json(err));
 };
 
+const deleteItem = (req, res) => {
+  req.app
+    .get("db")
+    .deleteItem([req.params.id])
+    .then(response => {
+      res.status(200).json(response);
+    })
+    .catch(err => console.log(err));
+};
+
 module.exports = {
   getAllItems,
   createItem,
   getItem,
-  changeItemPriority
+  changeItemPriority,
+  deleteItem
 };

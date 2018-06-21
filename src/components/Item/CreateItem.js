@@ -189,7 +189,7 @@ class CreateItem extends Component {
 
             <Link to={"/item/" + this.state.response}>
               <button onClick={this.addDefaultImage} className="post-button">
-                Test
+                Create Post
               </button>
             </Link>
 

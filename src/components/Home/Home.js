@@ -17,7 +17,6 @@ class Home extends Component {
         <div>
           <Item />
         </div>
-        )}
       </div>
     );
   }

@@ -1,13 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getItem } from "../../ducks/getItemReducer";
+import { deleteItem } from "../../ducks/deleteItemReducer";
 import { changeItemPriority } from "../../ducks/itemReducer";
 import { getUser, reduceCredit } from "../../ducks/userReducer";
 import Map from "../GoogleMaps/MapContainer";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
-import { faEnvelope, faPhone } from "@fortawesome/fontawesome-free-solid";
+import { Link } from "react-router-dom";
+import {
+  faEnvelope,
+  faPhone,
+  faTrashAlt,
+  faFire,
+  faArrowUp
+} from "@fortawesome/fontawesome-free-solid";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import Slider from "react-slick";
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
@@ -42,6 +52,23 @@ class ItemDescription extends Component {
       changeItemPriority(postId);
     }
   }
+  //TOAST
+  error = () =>
+    toast("Not enough credits. Add credits in your Profile.", {
+      type: toast.TYPE.ERROR,
+      autoClose: 4000
+    });
+  postDeleted = () =>
+    toast("Your post has been removed.", {
+      type: toast.TYPE.SUCCESS,
+      autoClose: 4000
+    });
+  success = () =>
+    toast("You moved your item to priority list", {
+      type: toast.TYPE.SUCCESS,
+      autoClose: 4000
+    });
+
   render() {
     const style = {
       width: "100%",
@@ -63,6 +90,7 @@ class ItemDescription extends Component {
     });
 
     let getPostUserId = item.map((curr, i) => {
+      console.log(curr.user_id);
       return curr.user_id;
     });
 
@@ -96,6 +124,10 @@ class ItemDescription extends Component {
       return (
         <div className="item details">
           <div className="item__title">
+            <div className="delete-button">
+              <ToastContainer />
+            </div>
+
             <Carousel
               showArrows={true}
               showStatus={true}
@@ -113,19 +145,84 @@ class ItemDescription extends Component {
           <h2 className="item__condition">{curr.item_description}</h2>
           <h2 className="item__location">{curr.item_location}</h2>
 
-          <a href={`mailto:${curr.user_email}`}>
-            <h2 className="item__email">
-              Email
-              <FontAwesomeIcon className="descSvg" icon={faEnvelope} />
-            </h2>
-          </a>
+          {getPostUserId[0] !== user.id ? (
+            <a href={`mailto:${curr.user_email}`}>
+              <h2 className="item__email">
+                Email
+                <FontAwesomeIcon className="descSvg" icon={faEnvelope} />
+              </h2>
+            </a>
+          ) : (
+            <div>
+              {getPostUserId[0] === user.id &&
+              getPostPriority[0] === 0 &&
+              !this.state.userHasClickedButton ? (
+                <h2
+                  className="item__setHighPriority"
+                  onClick={() =>
+                    this.moveItemToPriorityList(
+                      user.credits,
+                      user.id,
+                      getPostId
+                    )
+                  }
+                >
+                  High Priority<FontAwesomeIcon
+                    className="descSvg"
+                    icon={faArrowUp}
+                  />
+                </h2>
+              ) : getPostPriority[0] !== 0 && getPostUserId[0] === user.id ? (
+                <h2 className="item__highPriority">
+                  HOT
+                  <FontAwesomeIcon className="descSvg" icon={faFire} />
+                </h2>
+              ) : null}
+              {this.state.userHasClickedButton &&
+                (this.state.userHasCredits ? (
+                  <div>
+                    <h2 className="item__highPriority">
+                      HOT
+                      <FontAwesomeIcon className="descSvg" icon={faFire} />
+                    </h2>
+                    {i == 0 ? (
+                      <div className="display-none">{this.success()}</div>
+                    ) : null}
+                  </div>
+                ) : (
+                  <div>
+                    <Link to="/profile">
+                      <h2 className="item__addCredits">Add Credits</h2>
+                    </Link>
+                    {i == 0 ? (
+                      <div className="display-none">{this.error()}</div>
+                    ) : null}
+                  </div>
+                ))}
+            </div>
+          )
+          //Display else here
+          }
 
-          <a href={`tel:${curr.user_phone}`}>
-            <h2 className="item__call ">
-              Call
-              <FontAwesomeIcon className="descSvg" icon={faPhone} />
+          {getPostUserId[0] !== user.id ? (
+            <a href={`tel:${curr.user_phone}`}>
+              <h2 className="item__call ">
+                Call
+                <FontAwesomeIcon className="descSvg" icon={faPhone} />
+              </h2>
+            </a>
+          ) : (
+            <h2
+              className="item__delete"
+              onClick={() => {
+                this.props.deleteItem(getPostId[0]);
+                this.postDeleted();
+              }}
+            >
+              Delete
+              <FontAwesomeIcon className="descSvg" icon={faTrashAlt} />
             </h2>
-          </a>
+          )}
 
           <h2 />
           <div className="desc__test-map">
@@ -143,37 +240,7 @@ class ItemDescription extends Component {
     });
     return (
       <div>
-        {console.log(user)}
-
-        {getPostUserId[0] === user.id &&
-        getPostPriority[0] === 0 &&
-        !this.state.userHasClickedButton ? (
-          <div>
-            Set High Priority
-            {console.log(getPostPriority[0])}
-            <button
-              onClick={() =>
-                this.moveItemToPriorityList(user.credits, user.id, getPostId)
-              }
-            >
-              Set High Priority
-            </button>
-          </div>
-        ) : getPostPriority[0] !== 0 && getPostUserId[0] === user.id ? (
-          <div>Your post already have High Priority</div>
-        ) : null}
-
-        {this.state.userHasClickedButton &&
-          (this.state.userHasCredits ? (
-            <div>You used your credit to move this post to Priority list</div>
-          ) : (
-            <div>
-              <button>NOT ENOUGH CREDITS</button>
-              Not enough credits. Add some credits in Profile
-              {console.log("NO CREDITS")}
-            </div>
-          ))}
-        <div className="main-description">{itemMap.values().next().value}</div>
+        <div className="main-description">{itemMap[0]}</div>
       </div>
     );
   }
@@ -185,5 +252,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getItem, getUser, reduceCredit, changeItemPriority }
+  { getItem, getUser, reduceCredit, changeItemPriority, deleteItem }
 )(ItemDescription);

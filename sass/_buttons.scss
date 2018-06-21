@@ -19,9 +19,9 @@
   justify-content: center;
   align-items: left;
   flex-wrap: nowrap;
-  border-bottom: 2px solid red;
+  border-bottom: 1px solid #747474;
   text-align: left;
-  background-color: white;
+  background-color: #ababab;
 
   .mainSvg {
     color: white;
@@ -86,4 +86,7 @@
     background-color: darken(#009966, 5%);
     box-shadow: inset 0px 0px 10px #373737;
   }
+}
+.upload-image {
+  background-color: orange;
 }

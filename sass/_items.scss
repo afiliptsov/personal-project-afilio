@@ -27,7 +27,6 @@
   grid-gap: 7rem;
   margin-left: 6vw;
   margin-right: 6vw;
-  background-color: #f2f2f2;
 }
 .item__img {
   display: block;
@@ -125,9 +124,76 @@
     font-weight: 400;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
   }
   &__email:hover {
     background-color: darken(#385edd, 5%);
+  }
+  &__addCredits {
+    text-align: center;
+    padding: 2%;
+    width: 60%;
+    margin-left: 20%;
+    background-color: #385edd;
+    margin-bottom: 1vh;
+    color: white;
+    font-weight: 400;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+  &__addCredits:hover {
+    background-color: darken(#385edd, 5%);
+  }
+
+  &__delete {
+    text-align: center;
+    padding: 2%;
+    width: 60%;
+    margin-left: 20%;
+    background-color: #9f0000;
+    margin-bottom: 1vh;
+    color: white;
+    font-weight: 400;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+  &__delete:hover {
+    background-color: darken(#9f0000, 5%);
+  }
+
+  &__highPriority {
+    text-align: center;
+    padding: 2%;
+    width: 60%;
+    margin-left: 20%;
+    background-color: #ff4e33;
+    margin-bottom: 1vh;
+    color: white;
+    font-weight: 400;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  &__highPriority:hover {
+    background-color: darken(#ff4e33, 5%);
+  }
+
+  &__setHighPriority {
+    text-align: center;
+    padding: 2%;
+    width: 60%;
+    margin-left: 20%;
+    background-color: #96d403;
+    margin-bottom: 1vh;
+    color: white;
+    font-weight: 400;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+  &__setHighPriority:hover {
+    background-color: darken(#96d403, 5%);
   }
 
   &__call {
@@ -141,6 +207,7 @@
     font-weight: 400;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
   }
   &__call:hover {
     background-color: darken(#96d403, 5%);
@@ -181,4 +248,22 @@
 }
 .descSvg {
   margin-left: 1vw;
+}
+
+.display-none {
+  display: none;
+}
+
+@media only screen and (max-width: 400px) {
+  .item.details {
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+  .item__setHighPriority {
+    width: 70%;
+  }
+  .item__delete {
+    width: 70%;
+    margin-left: 10%;
+  }
 }
