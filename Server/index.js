@@ -1,4 +1,5 @@
 require("dotenv").config();
+const path = require("path");
 
 const express = require("express");
 const { json } = require("body-parser");
@@ -92,7 +93,7 @@ app.get(
     // failureRedirect: "/login"
 
     successRedirect: "/",
-    failureRedirect: "/"
+    failureRedirect: "/login"
   })
 );
 
