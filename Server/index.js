@@ -9,8 +9,6 @@ const massive = require("massive");
 const session = require("express-session");
 const passport = require("passport");
 
-app.use(express.static(`${__dirname}/../build`));
-
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const { getUser, strat, logout } = require(`${__dirname}/controllers/authCtrl`);
@@ -34,6 +32,7 @@ const { addProfileInfo } = require(`${__dirname}/controllers/profileCtrl`);
 const port = process.env.port || 3001;
 
 const app = express();
+app.use(express.static(`${__dirname}/../build`));
 
 //Massive is ORM Object Relational Mapper. Wrapper over database instance which gives tools to interact with it.
 massive(process.env.CONNECTION_STRING)
