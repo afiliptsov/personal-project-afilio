@@ -6,9 +6,6 @@
   border-width: 2px;
   margin: 10px;
 }
-.submit-application {
-  margin-bottom: 20px;
-}
 
 .post-button {
   margin-top: 20px;
@@ -84,7 +81,6 @@
     text-align: center;
     grid-column: 1/-1;
     background-color: white;
-    padding: 1rem;
     width: 80%;
     margin-left: 10%;
   }
@@ -265,5 +261,15 @@
   .item__delete {
     width: 70%;
     margin-left: 10%;
+  }
+  .item__call {
+    width: 60%;
+    margin-left: 20%;
+    padding: 4%;
+  }
+  .item__email {
+    width: 60%;
+    margin-left: 20%;
+    padding: 4%;
   }
 }

@@ -37,12 +37,29 @@ a {
     color: grey;
     padding: 0.7rem 2rem;
     background-color: #f4f2f2; }
+  .header .headerCategories {
+    font-size: 1.5rem; }
+  .header .headerCategories:hover {
+    border-bottom: 2px solid yellow; }
   .header .logo {
     width: 4rem;
     height: auto;
     margin-left: -2rem;
     align-items: center;
     margin-right: 3vw; }
+  .header .logoFont {
+    font-family: "Dancing Script", cursive;
+    font-size: 3rem;
+    color: black;
+    text-decoration: underline solid yellow; }
+
+@media only screen and (max-width: 420px) {
+  .header .logoFont {
+    font-size: 2rem; }
+  .header .headerCategories {
+    font-size: 1rem; }
+  .header .search {
+    display: none; } }
 
 .main-items {
   height: auto; }
@@ -51,9 +68,6 @@ a {
   border-style: solid;
   border-width: 2px;
   margin: 10px; }
-
-.submit-application {
-  margin-bottom: 20px; }
 
 .post-button {
   margin-top: 20px; }
@@ -115,7 +129,6 @@ a {
     text-align: center;
     grid-column: 1/-1;
     background-color: white;
-    padding: 1rem;
     width: 80%;
     margin-left: 10%; }
   .item__price {
@@ -265,7 +278,15 @@ a {
     width: 70%; }
   .item__delete {
     width: 70%;
-    margin-left: 10%; } }
+    margin-left: 10%; }
+  .item__call {
+    width: 60%;
+    margin-left: 20%;
+    padding: 4%; }
+  .item__email {
+    width: 60%;
+    margin-left: 20%;
+    padding: 4%; } }
 
 .fixed-createpost-button {
   position: fixed;
@@ -292,6 +313,10 @@ a {
   background-color: #ababab;
   z-index: 10; }
 
+.sticky {
+  position: sticky;
+  top: -1.2vh; }
+
 .categoryNames {
   color: white;
   font-size: 1.5rem;
@@ -299,7 +324,7 @@ a {
 
 .fireSvg {
   color: #ff4e33;
-  font-size: 4.5rem;
+  font-size: 4rem;
   text-align: center; }
 
 .fireButton {
@@ -340,18 +365,35 @@ a {
 .headerSvg {
   color: black;
   text-shadow: 3px 6px #272634;
-  font-size: 4.5rem;
+  font-size: 2.5rem;
   text-align: center;
   text-align: left; }
 
-.headerButtons:hover {
+.headerButtons:hover,
+.headerButtons.active {
   background-color: #ff4e33;
   box-shadow: inset 0px 0px 10px #373737; }
-  .headerButtons:hover .headerSvg {
+  .headerButtons:hover .headerSvg,
+  .headerButtons.active .headerSvg {
     color: white; }
 
-.upload-image {
-  background-color: orange; }
+.submit-application {
+  background-color: white;
+  padding: 2% 12%;
+  border-radius: 3px;
+  text-align: center;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
+  border: 5px solid #eee;
+  position: relative;
+  border: none;
+  display: block;
+  margin: 15vh auto;
+  cursor: pointer; }
+
+.submit-application:hover {
+  color: white;
+  background-color: #ff4e33;
+  box-shadow: inset 0px 0px 10px #373737; }
 
 @media only screen and (max-width: 1024px) {
   .fireButton {
@@ -360,18 +402,27 @@ a {
   .headerButtons {
     width: 8vw;
     height: 8vw; }
+  .fireSvg {
+    font-size: 3rem; }
   .headerSvg {
-    font-size: 3rem; } }
+    font-size: 2rem; } }
 
 @media only screen and (max-width: 440px) {
   .fireButton {
     width: 18vw;
     height: 18vw; }
+  .fireSvg {
+    font-size: 2.5rem; }
   .headerSvg {
-    font-size: 2rem; }
+    font-size: 1.5rem; }
   .headerButtons {
     width: 12vw;
     height: 12vw; } }
+
+.gm-style .gm-style-iw {
+  font-weight: 300;
+  font-size: 8px;
+  overflow: hidden; }
 
 .item-creator-info {
   display: grid;
@@ -416,7 +467,12 @@ a {
 
 .desc_image {
   max-width: 100%;
-  max-height: 100%; }
+  max-height: 100%;
+  min-height: 300px;
+  background-image: url("https://s3.envato.com/files/222431529/Uploading%20Logo%20Reveal%20PREVIEW%20IMAGE.jpg");
+  background-repeat: no-repeat;
+  background-size: 200%;
+  background-position: center; }
 
 .desc__leftElement {
   background-color: white;
@@ -434,11 +490,14 @@ a {
   margin: 0 auto; }
 
 .carousel.carousel-slider {
-  margin: 0 auto !important; }
+  margin: 0 auto !important;
+  width: 60% !important; }
 
 @media only screen and (max-width: 420px) {
   .desc_images_grid {
-    display: block; } }
+    display: block; }
+  .carousel.carousel-slider {
+    width: 100% !important; } }
 
 .profile-grid {
   grid-column: center-start / center-end;
@@ -492,3 +551,63 @@ a {
     margin-left: 0%;
     margin-right: 0%;
     margin: 1rem 0; } }
+
+.createItemGrid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap; }
+
+.chooseCategory {
+  margin-top: 2vh;
+  font-style: italic;
+  font-size: 2rem;
+  text-align: center; }
+
+.postInput {
+  background-color: #878686;
+  color: white;
+  margin: 4vh auto 0;
+  padding: 20px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid white;
+  border-radius: 10px; }
+
+.location {
+  position: relative; }
+
+.autocomplete-dropdown-container {
+  position: absolute;
+  width: 80%;
+  margin: 0 10%;
+  top: 40px;
+  transform-origin: center;
+  background-color: #878686;
+  border: 1px solid white;
+  border-radius: 10px; }
+
+.createItem-input {
+  background-color: #ededed;
+  border-radius: 10px;
+  border: 0.1% solid #5d5d5d;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 2px;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 2%;
+  width: 80%; }
+
+.headerButtons.createItem {
+  width: 12vw;
+  height: 12vw; }
+
+@media only screen and (max-width: 440px) {
+  .chooseCategoryText {
+    font-size: 1.5rem; }
+  .input-labels {
+    color: white; }
+  .submit-application {
+    margin: 20vh auto; }
+  .autocomplete-dropdown-container {
+    top: 30px; } }

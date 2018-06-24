@@ -46,6 +46,9 @@ class ImgUploader extends Component {
     console.log(this.props);
     return (
       <div className="upload-image">
+        <p className="chooseCategory">
+          <h2 className="chooseCategoryText">Upload an image</h2>
+        </p>
         <form>
           {console.log(this.state.itemURL)}
           {console.log("Final state is", this.state.avatarURL)}
@@ -61,12 +64,15 @@ class ImgUploader extends Component {
             multiple
             style={{
               display: "flex",
-              justifyCcontent: "center",
+              justifyContent: "center",
               backgroundColor: "steelblue",
-              margin: "20vh 25vw 0vh 25vw",
+              margin: "10vh 25vw",
               color: "white",
-              padding: 40,
-              borderRadius: 4
+              border: "2px solid #ffffff",
+              padding: "20px",
+              boxShadow:
+                "0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)",
+              fontSize: "2rem"
             }}
           >
             Upload images

@@ -8,8 +8,8 @@ class Payments extends Component {
   render() {
     return (
       <StripeCheckout
-        name="Afili"
-        description="5$ to push post to top"
+        name="Afili.io"
+        description="Add 1 Credit"
         amount={500}
         token={token => {
           this.props.postToken(token);

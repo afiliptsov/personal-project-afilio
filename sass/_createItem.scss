@@ -1,0 +1,69 @@
+.createItemGrid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.chooseCategory {
+  margin-top: 2vh;
+  font-style: italic;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.postInput {
+  background-color: #878686;
+  color: white;
+  margin: 4vh auto 0;
+  padding: 20px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid white;
+  border-radius: 10px;
+}
+.location {
+  position: relative;
+}
+.autocomplete-dropdown-container {
+  position: absolute;
+  width: 80%;
+  margin: 0 10%;
+  top: 40px;
+  transform-origin: center;
+  background-color: #878686;
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+.createItem-input {
+  background-color: rgb(237, 237, 237);
+  border-radius: 10px;
+  border: 0.1% solid $color-primary;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 2px;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 2%;
+  width: 80%;
+}
+
+.headerButtons.createItem {
+  width: 12vw;
+  height: 12vw;
+}
+
+@media only screen and (max-width: 440px) {
+  .chooseCategoryText {
+    font-size: 1.5rem;
+  }
+  .input-labels {
+    color: white;
+  }
+  .submit-application {
+    margin: 20vh auto;
+  }
+  .autocomplete-dropdown-container {
+    top: 30px;
+  }
+}

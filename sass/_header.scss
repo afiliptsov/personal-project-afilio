@@ -19,11 +19,38 @@
     background-color: $color-grey-light-2;
   }
 
+  .headerCategories {
+    font-size: 1.5rem;
+  }
+
+  .headerCategories:hover {
+    border-bottom: 2px solid yellow;
+  }
+
   .logo {
     width: 4rem;
     height: auto;
     margin-left: -2rem;
     align-items: center;
     margin-right: 3vw;
+  }
+
+  .logoFont {
+    font-family: "Dancing Script", cursive;
+    font-size: 3rem;
+    color: black;
+    text-decoration: underline solid yellow;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .header .logoFont {
+    font-size: 2rem;
+  }
+  .header .headerCategories {
+    font-size: 1rem;
+  }
+  .header .search {
+    display: none;
   }
 }

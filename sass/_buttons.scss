@@ -25,6 +25,10 @@
   background-color: #ababab;
   z-index: 10;
 }
+.sticky {
+  position: sticky;
+  top: -1.2vh;
+}
 
 .categoryNames {
   color: white;
@@ -34,7 +38,7 @@
 
 .fireSvg {
   color: #ff4e33;
-  font-size: 4.5rem;
+  font-size: 4rem;
   text-align: center;
 }
 
@@ -79,11 +83,12 @@
 .headerSvg {
   color: black;
   text-shadow: 3px 6px #272634;
-  font-size: 4.5rem;
+  font-size: 2.5rem;
   text-align: center;
   text-align: left;
 }
-.headerButtons:hover {
+.headerButtons:hover,
+.headerButtons.active {
   background-color: #ff4e33;
   box-shadow: inset 0px 0px 10px #373737;
   .headerSvg {
@@ -91,8 +96,23 @@
   }
 }
 
-.upload-image {
-  background-color: orange;
+.submit-application {
+  background-color: white;
+  padding: 2% 12%;
+  border-radius: 3px;
+  text-align: center;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
+  border: 5px solid #eee;
+  position: relative;
+  border: none;
+  display: block;
+  margin: 15vh auto;
+  cursor: pointer;
+}
+.submit-application:hover {
+  color: white;
+  background-color: #ff4e33;
+  box-shadow: inset 0px 0px 10px #373737;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -104,8 +124,11 @@
     width: 8vw;
     height: 8vw;
   }
-  .headerSvg {
+  .fireSvg {
     font-size: 3rem;
+  }
+  .headerSvg {
+    font-size: 2rem;
   }
 }
 
@@ -114,8 +137,11 @@
     width: 18vw;
     height: 18vw;
   }
+  .fireSvg {
+    font-size: 2.5rem;
+  }
   .headerSvg {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   .headerButtons {
     width: 12vw;

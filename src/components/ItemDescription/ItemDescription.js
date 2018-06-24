@@ -116,7 +116,7 @@ class ItemDescription extends Component {
     let imageMap = item.map((curr, i) => {
       return (
         <div key={i}>
-          <img className="desc_image" src={curr.image_url} alt="" />
+          <img className="desc_image" src={curr.image_url} alt="Image here" />
         </div>
       );
     });
@@ -132,13 +132,13 @@ class ItemDescription extends Component {
               showArrows={true}
               showStatus={true}
               showThumbs={false}
-              width={250}
+              // width={250}
             >
               {imageMap}
             </Carousel>
           </div>
-          <h1 className="item__title">{curr.item_title}</h1>
           <h2 className="item__price">{"$ " + curr.item_price}</h2>
+          <h1 className="item__title">{curr.item_title}</h1>
           <h2 className="item__description">Seller:</h2>
           <h2 className="item__condition">{curr.user_name}</h2>
           <h2 className="item__description">Description:</h2>
