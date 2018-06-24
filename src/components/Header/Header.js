@@ -15,7 +15,6 @@ class Header extends React.Component {
         <Link to="/">
           <p className="logoFont">Afili.io</p>
         </Link>
-        <input className="search" type="text" placeholder="Search Items" />
         <Link to="/">
           <p className="headerCategories">Home</p>
         </Link>

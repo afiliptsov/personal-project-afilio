@@ -352,6 +352,7 @@ a {
   background-color: white;
   width: 7vw;
   height: 7vw;
+  position: relative !important;
   margin: 0 2% 0 2%;
   border-radius: 50%;
   text-align: center;
@@ -360,7 +361,22 @@ a {
   position: relative;
   top: 15px;
   border: none;
+  overflow: hidden;
   cursor: pointer; }
+
+.beta-tag {
+  position: absolute;
+  top: 70%;
+  color: white;
+  left: -2%;
+  background-color: #ff4e33;
+  padding: 10% 4 0%;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(0deg); }
+
+.betaText {
+  position: absolute; }
 
 .headerSvg {
   color: black;
@@ -417,7 +433,9 @@ a {
     font-size: 1.5rem; }
   .headerButtons {
     width: 12vw;
-    height: 12vw; } }
+    height: 12vw; }
+  .displayNone {
+    display: none; } }
 
 .gm-style .gm-style-iw {
   font-weight: 300;

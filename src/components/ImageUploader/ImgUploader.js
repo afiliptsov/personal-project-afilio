@@ -4,6 +4,8 @@ import FileUploader from "react-firebase-file-uploader";
 import CustomUploadButton from "react-firebase-file-uploader/lib/CustomUploadButton";
 import { connect } from "react-redux";
 import { postImage } from "../../ducks/imageReducer";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class ImgUploader extends Component {
   constructor(props) {
@@ -15,6 +17,12 @@ class ImgUploader extends Component {
       itemURL: ""
     };
   }
+
+  success = () =>
+    toast("Images uploaded successfully", {
+      type: toast.TYPE.SUCCESS,
+      autoClose: 4000
+    });
 
   handleUploadStart = () => this.setState({ isUploading: true, progress: 0 });
   handleProgress = progress => this.setState({ progress });

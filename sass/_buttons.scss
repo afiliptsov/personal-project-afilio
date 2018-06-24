@@ -70,6 +70,7 @@
   background-color: white;
   width: 7vw;
   height: 7vw;
+  position: relative !important;
   margin: 0 2% 0 2%;
   border-radius: 50%;
   text-align: center;
@@ -78,8 +79,26 @@
   position: relative;
   top: 15px;
   border: none;
+  overflow: hidden;
   cursor: pointer;
 }
+
+.beta-tag {
+  position: absolute;
+  top: 70%;
+  color: white;
+  left: -2%;
+  background-color: #ff4e33;
+  padding: 10% 4 0%;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(0deg);
+}
+
+.betaText {
+  position: absolute;
+}
+
 .headerSvg {
   color: black;
   text-shadow: 3px 6px #272634;
@@ -109,6 +128,7 @@
   margin: 15vh auto;
   cursor: pointer;
 }
+
 .submit-application:hover {
   color: white;
   background-color: #ff4e33;
@@ -146,5 +166,8 @@
   .headerButtons {
     width: 12vw;
     height: 12vw;
+  }
+  .displayNone {
+    display: none;
   }
 }

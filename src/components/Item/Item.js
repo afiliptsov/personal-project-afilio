@@ -11,7 +11,8 @@ import {
   faBicycle,
   faReplyAll,
   faFire,
-  faPlus
+  faPlus,
+  faMap
 } from "@fortawesome/fontawesome-free-solid";
 import { animateScroll as scroll } from "react-scroll";
 
@@ -65,7 +66,7 @@ class Item extends Component {
           <Link to={"/item/" + items.id} key={items.id}>
             <div className="item">
               {items.priority === 1 ? (
-                <div class="priority-tag">HOT</div>
+                <div className="priority-tag">HOT</div>
               ) : null}
               <img className="item__img" src={items.image_url} alt="" />
               <h1 className="item__price">{"$ " + items.item_price}</h1>
@@ -113,9 +114,15 @@ class Item extends Component {
           >
             <FontAwesomeIcon className="headerSvg" icon={faBicycle} />
           </button>
+
+          <Link to="/map">
+            <button className="headerButtons displayNone">
+              <FontAwesomeIcon className="headerSvg" icon={faMap} />
+            </button>
+          </Link>
         </div>
 
-        <p className="fixed-createpost-button">
+        <div className="fixed-createpost-button">
           {!this.props.user.isAuthed ? (
             <a href={process.env.REACT_APP_LOGIN}>
               <p>
@@ -141,7 +148,7 @@ class Item extends Component {
               </p>
             </Link>
           )}
-        </p>
+        </div>
         <div className="items-grid">
           {itemsArray.length >= 1 ? itemsArray : null}
         </div>
