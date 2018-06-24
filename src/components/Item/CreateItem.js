@@ -29,16 +29,29 @@ class CreateItem extends Component {
       lng: 0,
       address: "",
       response: 0,
-      showCategory: true
+      showCategory: true,
+      gmapsLoaded: false
     };
     this.createNewListing = this.createNewListing.bind(this);
     this.onChangeHandlerCategory = this.onChangeHandlerCategory.bind(this);
     this.addDefaultImage = this.addDefaultImage.bind(this);
   }
 
+  initMap = () => {
+    this.setState({
+      gmapsLoaded: true
+    });
+  };
+
   componentDidMount() {
     this.props.getItems;
     this.props.getUser;
+    window.initMap = this.initMap;
+    const gmapScriptEl = document.createElement(`script`);
+    gmapScriptEl.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBO_mIevU6-9WS5ZnaR3z0UgNmBDHmsHQk&libraries=places&callback=initMap`;
+    document
+      .querySelector(`body`)
+      .insertAdjacentElement(`beforeend`, gmapScriptEl);
   }
   handleChange = address => {
     this.setState({ address });
@@ -174,57 +187,59 @@ class CreateItem extends Component {
               <p />
               {console.log(this.state.category)}
               <h2>Location:</h2>
-              <PlacesAutocomplete
-                value={this.state.address}
-                onChange={this.handleChange}
-              >
-                {({ getInputProps, suggestions, getSuggestionItemProps }) => (
-                  <div className="location">
-                    <input
-                      className="createItem-input"
-                      {...getInputProps({
-                        placeholder: "Item Location ...",
-                        className: "createItem-input"
-                      })}
-                    />
-                    <div className="autocomplete-dropdown-container">
-                      {suggestions.map(suggestion => {
-                        const className = suggestion.active
-                          ? "suggestion-item--active"
-                          : "suggestion-item";
-                        // inline style for demonstration purpose
-                        const style = suggestion.active
-                          ? {
-                              backgroundColor: "#878686",
-                              color: "white",
-                              cursor: "pointer",
-                              fontFamily: "Open Sans",
-                              fontSize: "1rem",
-                              padding: "3px"
-                            }
-                          : {
-                              backgroundColor: "#fafafa",
-                              color: "black",
-                              cursor: "pointer",
-                              fontFamily: "Open Sans",
-                              fontSize: "1rem",
-                              padding: "3px"
-                            };
-                        return (
-                          <div
-                            {...getSuggestionItemProps(suggestion, {
-                              className,
-                              style
-                            })}
-                          >
-                            <span>{suggestion.description}</span>
-                          </div>
-                        );
-                      })}
+              {this.state.gmapsLoaded && (
+                <PlacesAutocomplete
+                  value={this.state.address}
+                  onChange={this.handleChange}
+                >
+                  {({ getInputProps, suggestions, getSuggestionItemProps }) => (
+                    <div className="location">
+                      <input
+                        className="createItem-input"
+                        {...getInputProps({
+                          placeholder: "Item Location ...",
+                          className: "createItem-input"
+                        })}
+                      />
+                      <div className="autocomplete-dropdown-container">
+                        {suggestions.map(suggestion => {
+                          const className = suggestion.active
+                            ? "suggestion-item--active"
+                            : "suggestion-item";
+                          // inline style for demonstration purpose
+                          const style = suggestion.active
+                            ? {
+                                backgroundColor: "#878686",
+                                color: "white",
+                                cursor: "pointer",
+                                fontFamily: "Open Sans",
+                                fontSize: "1rem",
+                                padding: "3px"
+                              }
+                            : {
+                                backgroundColor: "#fafafa",
+                                color: "black",
+                                cursor: "pointer",
+                                fontFamily: "Open Sans",
+                                fontSize: "1rem",
+                                padding: "3px"
+                              };
+                          return (
+                            <div
+                              {...getSuggestionItemProps(suggestion, {
+                                className,
+                                style
+                              })}
+                            >
+                              <span>{suggestion.description}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </PlacesAutocomplete>
+                  )}
+                </PlacesAutocomplete>
+              )}
             </div>
             <p />
             <button
