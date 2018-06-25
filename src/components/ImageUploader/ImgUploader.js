@@ -87,7 +87,7 @@ class ImgUploader extends Component {
           </CustomUploadButton>
           {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
           {this.state.isUploading === false && this.state.progress === 100 ? (
-            <h1>UPLOADED</h1>
+            <h1 className="uploaded">UPLOADED</h1>
           ) : null}
         </form>
       </div>
